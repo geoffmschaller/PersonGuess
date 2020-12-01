@@ -1,4 +1,4 @@
-package com.example.personguess.views
+package com.example.personguess.views.start
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

@@ -6,7 +6,7 @@
     app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.personguess.views.StartFragment"
+        android:name="com.example.personguess.views.start.StartFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_gameFragment"
@@ -14,7 +14,16 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.personguess.views.GameFragment"
+        android:name="com.example.personguess.views.game.GameFragment"
         android:label="game_fragment"
-        tools:layout="@layout/game_fragment" />
+        tools:layout="@layout/game_fragment" >
+        <action
+            android:id="@+id/action_gameFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.example.personguess.views.results.ResultsFragment"
+        android:label="results_fragment"
+        tools:layout="@layout/results_fragment" />
 </navigation>
