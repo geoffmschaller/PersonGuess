@@ -12,27 +12,25 @@ import com.example.personguess.databinding.StartFragmentBinding
 
 class StartFragment : Fragment() {
 
-	lateinit var binding: StartFragmentBinding
-
 	companion object {
 		fun newInstance() = StartFragment()
 	}
 
 	private lateinit var viewModel: StartViewModel
+	lateinit var binding: StartFragmentBinding
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 
-	): View? {
+	): View {
+		viewModel = ViewModelProvider(this, StartViewModelFactory()).get(StartViewModel::class.java)
 		binding = StartFragmentBinding.inflate(inflater, container, false)
 		return binding.root
 	}
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
-		viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
-
 		binding.startButton.setOnClickListener {
 			findNavController().navigate(R.id.action_startFragment_to_gameFragment)
 		}

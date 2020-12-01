@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.personguess.R
 import com.example.personguess.data.GameMode
 import com.example.personguess.databinding.GameFragmentBinding
 
@@ -26,13 +25,13 @@ class GameFragment : Fragment() {
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
+		viewModel = ViewModelProvider(this, GameViewModelFactory()).get(GameViewModel::class.java)
 		binding = GameFragmentBinding.inflate(inflater, container, false)
 		return binding.root
 	}
 
 	override fun onActivityCreated(savedInstanceState: Bundle?) {
 		super.onActivityCreated(savedInstanceState)
-		viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
 		binding.passButton.setOnClickListener {
 			viewModel.scoreQuestion(false)
@@ -48,7 +47,11 @@ class GameFragment : Fragment() {
 
 		viewModel.gameMode.observe(viewLifecycleOwner, Observer { newGameMode ->
 			if (newGameMode == GameMode.DONE) {
-				findNavController().navigate(R.id.action_gameFragment_to_resultsFragment)
+				findNavController().navigate(
+					GameFragmentDirections.actionGameFragmentToResultsFragment(
+						viewModel.score
+					)
+				)
 			}
 		})
 	}

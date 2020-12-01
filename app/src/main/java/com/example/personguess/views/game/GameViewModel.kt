@@ -7,7 +7,7 @@ import com.example.personguess.data.People
 
 class GameViewModel : ViewModel() {
 
-	val people = People.getPeople()
+	private val people = People.getPeople()
 	var currentIndex = 0
 	var score = 0
 
