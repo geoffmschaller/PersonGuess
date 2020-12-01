@@ -1,5 +1,6 @@
 package com.example.personguess.views.game
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personguess.data.GameMode
 import com.example.personguess.data.People
@@ -7,10 +8,11 @@ import com.example.personguess.data.People
 class GameViewModel : ViewModel() {
 
 	val people = People.getPeople()
-	var gameMode = GameMode.PLAYING
-	var score = 0
-	var currentPerson = ""
 	var currentIndex = 0
+	var score = 0
+
+	var gameMode = MutableLiveData<GameMode>(GameMode.PLAYING)
+	var currentPerson = MutableLiveData<String>(people[currentIndex])
 
 	override fun onCleared() {
 		super.onCleared()
@@ -22,11 +24,10 @@ class GameViewModel : ViewModel() {
 		}
 		currentIndex += 1
 		if (currentIndex < people.size) {
-			currentPerson = people[currentIndex]
+			currentPerson.value = people[currentIndex]
 		} else {
-			gameMode = GameMode.DONE
+			gameMode.value = GameMode.DONE
 		}
-
 	}
 
 }
